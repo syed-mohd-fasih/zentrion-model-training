@@ -6,7 +6,7 @@ from pathlib import Path
 # ---------------------------
 # OUTPUT
 # ---------------------------
-OUTPUT_FILE = "../data/processed/training.jsonl"
+OUTPUT_FILE = "../data/processed/logs.jsonl"
 
 def load_csv_file(path):
     """Generator: Reads a CSV file and yields each row as a dictionary."""
