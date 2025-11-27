@@ -19,10 +19,10 @@ tokenizer.pad_token = tokenizer.eos_token
 # -----------------------
 dataset = load_dataset("json", data_files={
     "train": [
-        "../data/logs.jsonl",
-        # "../data/policies.jsonl",
-        # "../data/manifests.jsonl",
-        # "../data/qa_reasoning.jsonl"
+        "../data/processed/logs.jsonl",
+        # "../data/processed/policies.jsonl",
+        # "../data/processed/manifests.jsonl",
+        # "../data/processed/qa_reasoning.jsonl"
     ]
 })
 
