@@ -50,7 +50,7 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="auto",
     torch_dtype=torch.float16,
     low_cpu_mem_usage=True,
-    max_memory={0: "18GB"},
+    max_memory={0: "19GB"},
 )
 
 # Prepare model for k-bit training (CRITICAL for memory)
@@ -72,8 +72,8 @@ model.gradient_checkpointing_enable()
 # LoRA Config
 # -----------------------
 lora_config = LoraConfig(
-    r=32,
-    lora_alpha=16,
+    r=64,
+    lora_alpha=32,
     target_modules=[
         "q_proj", "v_proj", "k_proj", "o_proj",
         "gate_proj", "up_proj", "down_proj"
@@ -93,8 +93,8 @@ model.print_trainable_parameters()
 # -----------------------
 training_args = TrainingArguments(
     output_dir="../checkpoints/",
-    per_device_train_batch_size=1,
-    gradient_accumulation_steps=16,
+    per_device_train_batch_size=4,
+    gradient_accumulation_steps=4,
     num_train_epochs=3,
     logging_steps=5,
     save_steps=250,
@@ -159,7 +159,7 @@ trainer = SFTTrainer(
     train_dataset=dataset["train"],
     tokenizer=tokenizer,
     args=training_args,
-    max_seq_length=1024,
+    max_seq_length=2048,
     packing=False,
     formatting_func=format_example,
     dataset_text_field=None,
